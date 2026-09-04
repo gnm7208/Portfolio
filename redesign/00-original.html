@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Njihia Mukirai — Digital Craftsman</title>
+<meta name="description" content="George Njihia Mukirai — software developer in Nairobi, Kenya. Full-stack web and Android (Kotlin) developer.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #2dd4bf;
+    --accent2: #f59e0b;
+    --green: #3fb950;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+  code, .mono { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13,17,23,.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+  nav .logo { color: var(--accent); font-weight: 700; }
+  nav ul { display: flex; gap: 22px; list-style: none; }
+  nav ul a { color: var(--muted); font-size: .92rem; }
+  nav ul a:hover { color: var(--accent); text-decoration: none; }
+
+  /* Hero */
+  header { padding: 70px 0 50px; }
+  .hero { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+  .avatar {
+    width: 190px; height: 190px; border-radius: 50%;
+    border: 3px dashed var(--accent);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--muted); font-size: .78rem; text-align: center; gap: 6px;
+    background: var(--panel); flex-shrink: 0;
+  }
+  .avatar .initials { font-size: 2.6rem; color: var(--accent); font-weight: 700; }
+  .hero h1 { font-size: 2.3rem; line-height: 1.2; }
+  .hero h1 span { color: var(--accent); }
+  .hero .sub { color: var(--accent2); margin: 6px 0 14px; font-size: 1.05rem; }
+  .terminal {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    margin-top: 18px; max-width: 640px; overflow: hidden;
+  }
+  .terminal .bar { background: #21262d; padding: 7px 12px; display: flex; gap: 6px; align-items: center; }
+  .terminal .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .terminal .bar span:last-child { color: var(--muted); font-size: .75rem; margin-left: 10px; }
+  .terminal pre { padding: 14px 16px; font-size: .86rem; color: var(--text); white-space: pre-wrap; }
+  .prompt { color: var(--green); }
+  .cmd { color: var(--text); }
+  .out { color: var(--muted); }
+  .cursor { display: inline-block; width: 8px; background: var(--accent); animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  section { padding: 48px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.5rem; margin-bottom: 8px; }
+  h2::before { content: "// "; color: var(--muted); font-weight: 400; }
+  .lead { color: var(--muted); max-width: 720px; margin-bottom: 26px; }
+
+  /* Cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px; display: flex; flex-direction: column; gap: 10px;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .card h3 { font-size: 1.08rem; }
+  .badge {
+    display: inline-block; font-size: .7rem; padding: 2px 9px; border-radius: 999px;
+    border: 1px solid var(--accent); color: var(--accent); width: fit-content;
+  }
+  .badge.amber { border-color: var(--accent2); color: var(--accent2); }
+  .badge.green { border-color: var(--green); color: var(--green); }
+  .card p { color: var(--muted); font-size: .9rem; flex-grow: 1; }
+  .stack { font-size: .76rem; color: var(--accent2); }
+  .card .links { display: flex; gap: 14px; flex-wrap: wrap; font-size: .85rem; }
+
+  /* Skills */
+  .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 13px; font-size: .84rem; color: var(--text);
+  }
+  .chip:hover { border-color: var(--accent); }
+
+  /* Education */
+  .edu { border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; margin-bottom: 20px; }
+  .edu h3 { font-size: 1.02rem; }
+  .edu p { color: var(--muted); font-size: .9rem; }
+
+  /* Contact */
+  .contact-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; }
+  .btn {
+    border: 1px solid var(--accent); color: var(--accent); border-radius: 8px;
+    padding: 10px 20px; font-size: .92rem;
+  }
+  .btn:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
+  footer { border-top: 1px solid var(--border); padding: 26px 0 34px; color: var(--muted); font-size: .82rem; text-align: center; }
+  footer .joke { margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="logo mono">~/george-mukirai $</span>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="wrap">
+  <div class="hero">
+    <div class="avatar" title="Photo deploying soon">
+      <span class="initials">GM</span>
+      <span class="mono">img/george.jpg<br>404 — photo not found<br>(deployment pending)</span>
+    </div>
+    <div>
+      <h1>Hi, I'm <span>George Njihia Mukirai</span></h1>
+      <p class="sub mono">Digital Craftsman — I don't just write code, I whittle it.</p>
+      <p style="color:var(--muted); max-width:560px;">
+        Software developer in Nairobi, Kenya. An avid learner — history, recent trends,
+        and the occasional stack trace at 2 a.m. I build my version of the digital world
+        one commit at a time, with the goal of making the difficult seem mundane.
+      </p>
+      <div class="terminal mono">
+        <div class="bar">
+          <span class="dot" style="background:#ff5f57"></span>
+          <span class="dot" style="background:#febc2e"></span>
+          <span class="dot" style="background:#28c840"></span>
+          <span>george@nairobi: ~</span>
+        </div>
+        <pre><span class="prompt">$</span> <span class="cmd">whoami</span>
+<span class="out">george — full-stack developer, part-time robot enthusiast</span>
+<span class="prompt">$</span> <span class="cmd">git log --author="George" --oneline | wc -l</span>
+<span class="out">more than my sleep hours, fewer than my ideas</span>
+<span class="prompt">$</span> <span class="cmd">./solve_real_world_problems.sh --community=nairobi</span>
+<span class="out">running... </span><span class="cursor">&nbsp;</span></pre>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2>about_me</h2>
+    <p class="lead">
+      I started as a naive computer-science enthusiast who wanted to learn everything —
+      code, Unix, Linux, theory — and I'm still that person, just with better error handling.
+      I build projects from the ground up: planning, design, implementation, and deployment.
+      My dream? To help carve out a name for Africa in software and robotics.
+      (Blame the Transformers movies. I do.)
+    </p>
+    <p class="lead">
+      I trained in full-stack software development at <strong>Moringa School</strong> and in
+      mobile development (Kotlin/Android) at <strong>eMobilis Technology Institute</strong>,
+      both in Nairobi. My happy place is a Flask API talking to a PostgreSQL database,
+      with a React frontend that doesn't need a single <code>!important</code>.
+    </p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>featured_projects</h2>
+    <p class="lead">Three projects, three ways of working: with a team, flying solo, and going mobile.</p>
+    <div class="grid">
+
+      <div class="card">
+        <span class="badge green">Team Collaboration</span>
+        <h3>AgriLink 🌱</h3>
+        <p>
+          An agricultural super app connecting farmers with experts through posts,
+          communities, and messaging. I was one of two backend developers in a
+          four-person team — JWT auth, role-based access, rate limiting, image uploads,
+          and a news feed built from two external APIs.
+        </p>
+        <span class="stack mono">React 19 · Flask · PostgreSQL · Cloudinary · GitHub Actions</span>
+        <div class="links">
+          <a href="https://agrilink-sigma.vercel.app" target="_blank" rel="noopener">🔗 Live app</a>
+          <a href="https://agrilink-11rw.onrender.com" target="_blank" rel="noopener">⚙️ API</a>
+          <a href="https://github.com/gnm7208/Agrilink" target="_blank" rel="noopener">📂 Code</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="badge">Solo Build</span>
+        <h3>Fiti Electronics 🛒</h3>
+        <p>
+          A mini e-commerce store for electronics — category filters, live search,
+          a persistent cart, and a checkout flow. Designed, built, and deployed
+          entirely by me, from the first wireframe to the last <code>git push</code>.
+        </p>
+        <span class="stack mono">JavaScript (ES6+) · JSON Server · Netlify · Render</span>
+        <div class="links">
+          <a href="https://fiti.netlify.app" target="_blank" rel="noopener">🔗 Live app</a>
+          <a href="https://fiti-electronics.onrender.com" target="_blank" rel="noopener">🔗 Mirror</a>
+          <a href="https://github.com/gnm7208/Fiti_Electronics" target="_blank" rel="noopener">📂 Code</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="badge amber">Mobile · Kotlin</span>
+        <h3>Fint 📱</h3>
+        <p>
+          A native Android school-management app written 100% in Kotlin — my capstone
+          from the Mobile Internet Technology (MIT) programme at eMobilis.
+          Next on the roadmap: a modernisation pass and M-Pesa integration for fee payments.
+        </p>
+        <span class="stack mono">Kotlin · Android · Gradle</span>
+        <div class="links">
+          <a href="https://github.com/gnm7208/Fint" target="_blank" rel="noopener">📂 Code</a>
+          <span style="color:var(--muted); font-size:.8rem;">(native app — the “live link” is an APK)</span>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin-top:22px; color:var(--muted); font-size:.9rem;">
+      Bonus level: <a href="https://github.com/gnm7208/Vetty" target="_blank" rel="noopener">Vetty</a>
+      (a veterinary e-commerce REST API) and
+      <a href="https://github.com/gnm7208/Mbuu_2" target="_blank" rel="noopener">Mbuu</a>
+      (a car-dealership CLI) live on
+      <a href="https://github.com/gnm7208?tab=repositories" target="_blank" rel="noopener">my GitHub</a> —
+      188 repositories and counting. Yes, I commit. Often.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>skills --list</h2>
+    <p class="lead">Languages and tools I speak fluently (and a few I argue with regularly):</p>
+    <div class="skills">
+      <span class="chip">Python</span>
+      <span class="chip">JavaScript (ES6+)</span>
+      <span class="chip">Kotlin</span>
+      <span class="chip">SQL</span>
+      <span class="chip">HTML5</span>
+      <span class="chip">CSS3</span>
+      <span class="chip">Bash</span>
+      <span class="chip">C++</span>
+      <span class="chip">Flask</span>
+      <span class="chip">SQLAlchemy</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">React</span>
+      <span class="chip">Vite</span>
+      <span class="chip">TailwindCSS</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">Android</span>
+      <span class="chip">Git / GitHub</span>
+      <span class="chip">GitHub Actions</span>
+      <span class="chip">Linux</span>
+      <span class="chip">Render · Vercel · Netlify</span>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>education</h2>
+    <div class="edu">
+      <h3>Moringa School — Nairobi, Kenya</h3>
+      <p>Software Development (Full-Stack Software Engineering): JavaScript, React, Python, Flask, SQL, and collaborative Git workflows across five project-based phases.</p>
+    </div>
+    <div class="edu">
+      <h3>eMobilis Technology Institute — Nairobi, Kenya</h3>
+      <p>Mobile Internet Technology (MIT): mobile development programme including native Android with Kotlin.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>ping_me</h2>
+    <p class="lead">
+      Got a project, a job, or a strong opinion about tabs vs spaces?
+      My inbox has a 100% uptime SLA (unlike some free-tier backends I know).
+    </p>
+    <div class="contact-links">
+      <a class="btn mono" href="mailto:mukiraigeorge@gmail.com">✉ mukiraigeorge@gmail.com</a>
+      <a class="btn mono" href="https://github.com/gnm7208" target="_blank" rel="noopener">GitHub / gnm7208</a>
+      <a class="btn mono" href="https://www.linkedin.com/in/george-mukirai-70b64a37a/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© <span id="yr"></span> George Njihia Mukirai — Nairobi, Kenya</span>
+    <p class="joke">Built with HTML, CSS, and a dangerous amount of tea. No frameworks were harmed in the making of this page.</p>
+  </div>
+</footer>
+
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Njihia Mukirai — Software for the cash economy</title>
+<meta name="description" content="George Njihia Mukirai — full-stack developer in Nairobi, Kenya. Flask, PostgreSQL, React, Kotlin. Software for chamas, fundis, traders and farmers.">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F0F2EE; --card:#FFFFFF; --ink:#141A17; --ink-2:#4E5A54; --ink-3:#7C8781;
+  --rule:#D8DDD6; --rule-2:#C2C9BF;
+  --acc:#0E5C48; --acc-soft:#DEEBE5; --clay:#B0532B;
+  --display:"Fraunces",Georgia,serif; --sans:"Public Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121513; --card:#191E1B; --ink:#E9EEEA; --ink-2:#A3AEA8; --ink-3:#7A857F;
+  --rule:#242B27; --rule-2:#333C37; --acc:#5CCFA9; --acc-soft:#16302A; --clay:#D98A5F;
+}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:0 26px}
+a{color:var(--acc)}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+
+nav{border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:18px}
+nav .name{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.01em}
+nav ul{display:flex;gap:24px;list-style:none;flex-wrap:wrap}
+nav ul a{font-size:.85rem;color:var(--ink-2);text-decoration:none}
+nav ul a:hover{color:var(--acc)}
+
+header{padding:74px 0 68px}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:56px;align-items:center}
+.kicker{font-family:var(--mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin-bottom:20px}
+h1{font-family:var(--display);font-size:clamp(2.5rem,6vw,4rem);line-height:1.02;letter-spacing:-.025em;font-weight:600;text-wrap:balance}
+.tagline{font-family:var(--display);font-style:italic;font-size:1.22rem;color:var(--ink-2);margin:18px 0 20px}
+.lead{color:var(--ink-2);max-width:52ch;font-size:1.05rem}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{font-size:.92rem;font-weight:500;text-decoration:none;padding:12px 20px;border-radius:2px;transition:.18s}
+.btn.solid{background:var(--acc);color:var(--paper)}
+.btn.solid:hover{filter:brightness(1.12);text-decoration:none}
+.btn.ghost{border:1px solid var(--rule-2);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--acc);color:var(--acc);text-decoration:none}
+figure.shot{margin:0}
+figure.shot img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;display:block;border-radius:2px}
+figure.shot figcaption{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);letter-spacing:.05em;margin-top:12px;display:flex;justify-content:space-between;gap:10px}
+
+section{padding:64px 0;border-top:1px solid var(--rule)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px;flex-wrap:wrap}
+h2{font-family:var(--display);font-size:1.85rem;font-weight:600;letter-spacing:-.02em}
+.sec-head .note{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.prose{max-width:64ch}
+.prose p{color:var(--ink-2)}
+.prose p + p{margin-top:18px}
+.prose strong{color:var(--ink);font-weight:600}
+.prose code{font-family:var(--mono);font-size:.85em;background:var(--acc-soft);color:var(--acc);padding:.12em .38em;border-radius:2px}
+
+.proj{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:40px;padding:28px 0;border-top:1px solid var(--rule)}
+.proj:first-of-type{border-top:0;padding-top:4px}
+.proj h3{font-family:var(--display);font-size:1.45rem;font-weight:600;letter-spacing:-.02em;margin-bottom:4px}
+.proj .what{font-weight:500;color:var(--ink);margin-bottom:8px}
+.proj p.desc{color:var(--ink-2);max-width:58ch;font-size:.98rem}
+.meta{display:flex;flex-direction:column;gap:12px;padding-top:6px}
+.tag{align-self:flex-start;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);background:var(--acc-soft);padding:4px 9px;border-radius:2px}
+.tag.clay{color:var(--clay);background:transparent;border:1px solid var(--rule-2)}
+.stack{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);line-height:1.85}
+.golinks{display:flex;flex-direction:column;gap:6px;font-size:.88rem}
+.golinks a{text-decoration:none;border-bottom:1px solid var(--rule-2);align-self:flex-start;padding-bottom:1px}
+.golinks a:hover{border-color:var(--acc)}
+.cold{margin-top:30px;font-size:.9rem;color:var(--ink-3);border-left:2px solid var(--rule-2);padding-left:16px;max-width:64ch}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:34px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:var(--mono);font-size:.76rem;color:var(--ink-2);border:1px solid var(--rule);background:var(--card);padding:6px 11px;border-radius:2px}
+.edu h3{font-family:var(--display);font-size:1.15rem;font-weight:600;margin-bottom:4px}
+.edu p{color:var(--ink-2);font-size:.94rem}
+.edu + .edu{margin-top:22px}
+.contact-lead{font-size:1.1rem;color:var(--ink-2);max-width:54ch;margin-bottom:24px}
+footer{padding:36px 0 52px;border-top:1px solid var(--rule);font-size:.85rem;color:var(--ink-3);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:34px}
+  figure.shot{order:-1;max-width:340px}
+  .proj{grid-template-columns:1fr;gap:16px}
+  .meta{flex-direction:column;padding-top:0}
+  section{padding:46px 0}
+  header{padding:44px 0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <span class="name">George Njihia Mukirai</span>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="hero">
+    <div>
+      <p class="kicker">Full-stack developer · Nairobi</p>
+      <h1>Software for the cash economy.</h1>
+      <p class="tagline">Digital Craftsman — I don't just write code, I whittle it.</p>
+      <p class="lead">Chamas, fundis, boda riders, market traders, smallholder farmers. My work starts from one question: what does this person do with a notebook today, and what would make the digital version faster than the notebook? Backend first, shipped end to end.</p>
+      <div class="hero-cta">
+        <a class="btn solid" href="#work">See the work</a>
+        <a class="btn ghost" href="mailto:mukiraigeorge@gmail.com">Get in touch</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <img src="../assets/img/profile.jpg" alt="George Njihia Mukirai">
+      <figcaption><span>George Njihia Mukirai</span><span>Nairobi, KE</span></figcaption>
+    </figure>
+  </div>
+</div></header>
+
+<section id="work"><div class="wrap">
+  <div class="sec-head"><h2>Selected work</h2><span class="note">Six live · two on the bench</span></div>
+
+  <article class="proj">
+    <div>
+      <h3>Kipato</h3>
+      <p class="what">Offline-first income record for informal workers</p>
+      <p class="desc">Log daily cash earnings with no signal, import M-PESA history, and generate a verifiable income statement a SACCO or lender can open without an account. An IndexedDB outbox queues everything written offline and reconciles when the connection returns.</p>
+    </div>
+    <div class="meta">
+      <span class="tag">Solo build</span>
+      <p class="stack">React 19 · Vite · Tailwind 4<br>Flask · SQLAlchemy · PostgreSQL</p>
+      <p class="golinks"><a href="https://kipato.vercel.app" target="_blank" rel="noopener">Open the live app →</a><a href="https://github.com/gnm7208/kipato" target="_blank" rel="noopener">Read the source →</a></p>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div>
+      <h3>Hesabu</h3>
+      <p class="what">Close-the-books tooling for chamas</p>
+      <p class="desc">Parses a savings group's M-PESA messages into a dispute-proof ledger — contributions, arrears, monthly statements — so the treasurer's reconciliation stops being a night of matching SMS to names in a notebook.</p>
+    </div>
+    <div class="meta">
+      <span class="tag">Solo build</span>
+      <p class="stack">React · TypeScript<br>Flask · PostgreSQL</p>
+      <p class="golinks"><a href="https://hesabu-sigma.vercel.app" target="_blank" rel="noopener">Open the live app →</a><a href="https://github.com/gnm7208/Hesabu" target="_blank" rel="noopener">Read the source →</a></p>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div>
+      <h3>Fundi Connect</h3>
+      <p class="what">Verified services marketplace with M-PESA escrow</p>
+      <p class="desc">Households and businesses matched with verified craftspeople. The customer's money is locked with the platform, not handed to the fundi. Identity verification, geo-search, ratings, Daraja integration — and every shilling stored as an integer minor unit, so no float ever touches money.</p>
+    </div>
+    <div class="meta">
+      <span class="tag">Solo build</span>
+      <p class="stack">React 19 · TypeScript · Vite<br>Flask 3 · SQLAlchemy 2 · Daraja</p>
+      <p class="golinks"><a href="https://fundi-connect-pi.vercel.app" target="_blank" rel="noopener">Open the live app →</a><a href="https://github.com/gnm7208/fundi-connect" target="_blank" rel="noopener">Read the source →</a></p>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div>
+      <h3>Soko</h3>
+      <p class="what">A local marketplace</p>
+      <p class="desc">Retailers and customers, with listings, search, maps, delivery, real-time chat, ratings and payments. Socket.IO for the chat, webhooks for the money.</p>
+    </div>
+    <div class="meta">
+      <span class="tag">Solo build</span>
+      <p class="stack">React · TypeScript<br>Flask · PostgreSQL · Socket.IO · Stripe</p>
+      <p class="golinks"><a href="https://soko-app-eight.vercel.app" target="_blank" rel="noopener">Open the live app →</a><a href="https://github.com/gnm7208/Soko" target="_blank" rel="noopener">Read the source →</a></p>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div>
+      <h3>AgriLink</h3>
+      <p class="what">Agricultural super app connecting farmers with experts</p>
+      <p class="desc">Posts, communities and messaging, plus a market price board and a crop issue helper. I was one of two backend developers in a four-person team — JWT auth, role-based access, rate limiting, image uploads, and a news feed built from two external APIs.</p>
+    </div>
+    <div class="meta">
+      <span class="tag">Team of four · backend</span>
+      <p class="stack">React 19 · Flask · PostgreSQL<br>Cloudinary · GitHub Actions</p>
+      <p class="golinks"><a href="https://agrilink-self.vercel.app" target="_blank" rel="noopener">Open the live app →</a><a href="https://github.com/gnm7208/Agrilink" target="_blank" rel="noopener">Read the source →</a></p>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div>
+      <h3>Fiti Electronics</h3>
+      <p class="what">A mini e-commerce store for electronics</p>
+      <p class="desc">Category filters, live search, a persistent cart and a checkout flow. Designed, built and deployed entirely by me, from the first wireframe to the last <code>git push</code>.</p>
+    </div>
+    <div class="meta">
+      <span class="tag">Solo build</span>
+      <p class="stack">JavaScript (ES6+)<br>JSON Server · Netlify</p>
+      <p class="golinks"><a href="https://fiti.netlify.app" target="_blank" rel="noopener">Open the live app →</a><a href="https://github.com/gnm7208/Fiti_Electronics" target="_blank" rel="noopener">Read the source →</a></p>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div>
+      <h3>Fint &nbsp;·&nbsp; Tubonge</h3>
+      <p class="what">On the bench</p>
+      <p class="desc"><strong>Fint</strong> — a native Android school-management app written 100% in Kotlin, my eMobilis capstone; a modernisation pass and M-Pesa fee payments are next. <strong>Tubonge</strong> — an online therapy platform for Kenya with licensed therapists, M-Pesa booking and video sessions; the data model, RLS rules and payment flow are designed and implementation is under way.</p>
+    </div>
+    <div class="meta">
+      <span class="tag clay">In progress</span>
+      <p class="stack">Kotlin · Android<br>Next.js · Supabase · Daily.co</p>
+      <p class="golinks"><a href="https://github.com/gnm7208/Fint" target="_blank" rel="noopener">Fint source →</a><a href="https://github.com/gnm7208/Tubonge" target="_blank" rel="noopener">Tubonge source →</a></p>
+    </div>
+  </article>
+
+  <p class="cold">The APIs run on free Render instances and cold-start after inactivity — the first request can take about 50 seconds, so give the login screen a moment. Bonus level: <a href="https://github.com/gnm7208/Vetty" target="_blank" rel="noopener">Vetty</a>, a veterinary e-commerce REST API, and <a href="https://github.com/gnm7208/Mbuu_2" target="_blank" rel="noopener">Mbuu</a>, a car-dealership CLI.</p>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <div class="sec-head"><h2>About</h2></div>
+  <div class="prose">
+    <p>I started as a naive computer-science enthusiast who wanted to learn everything — code, Unix, Linux, theory — and I'm still that person, just with better error handling. I build projects from the ground up: planning, design, implementation, and deployment. My dream? To help carve out a name for Africa in software and robotics. (Blame the Transformers movies. I do.)</p>
+    <p>I trained in full-stack software development at <strong>Moringa School</strong> and in mobile development (Kotlin/Android) at <strong>eMobilis Technology Institute</strong>, both in Nairobi. My happy place is a Flask API talking to a PostgreSQL database, with a React frontend that doesn't need a single <code>!important</code>.</p>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="sec-head"><h2>Skills &amp; schooling</h2></div>
+  <div class="two">
+    <div>
+      <p style="color:var(--ink-2);margin-bottom:18px;font-size:.95rem">Languages and tools I speak fluently (and a few I argue with regularly):</p>
+      <div class="chips">
+        <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Kotlin</span><span class="chip">SQL</span><span class="chip">Bash</span><span class="chip">C++</span><span class="chip">Flask</span><span class="chip">SQLAlchemy</span><span class="chip">PostgreSQL</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">Node.js</span><span class="chip">Android</span><span class="chip">Git</span><span class="chip">GitHub Actions</span><span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">Render · Vercel · Netlify</span>
+      </div>
+    </div>
+    <div>
+      <div class="edu">
+        <h3>Moringa School</h3>
+        <p>Full-Stack Software Engineering — JavaScript, React, Python, Flask, SQL and collaborative Git workflows across five project-based phases. Nairobi, Kenya.</p>
+      </div>
+      <div class="edu">
+        <h3>eMobilis Technology Institute</h3>
+        <p>Mobile Internet Technology — mobile development including native Android with Kotlin. Nairobi, Kenya.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <div class="sec-head"><h2>Get in touch</h2></div>
+  <p class="contact-lead">Got a project, a job, or a strong opinion about tabs vs spaces? My inbox has a 100% uptime SLA (unlike some free-tier backends I know).</p>
+  <div class="hero-cta">
+    <a class="btn solid" href="mailto:mukiraigeorge@gmail.com">✉ mukiraigeorge@gmail.com</a>
+    <a class="btn ghost" href="https://github.com/gnm7208" target="_blank" rel="noopener">GitHub / gnm7208</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/george-mukirai-70b64a37a/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:0 26px">
+  <span>© <span id="yr"></span> George Njihia Mukirai — Nairobi, Kenya</span>
+  <span>Built with HTML, CSS, and a dangerous amount of tea.</span>
+</div></footer>
+
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Njihia Mukirai — The Ledger</title>
+<meta name="description" content="George Njihia Mukirai — full-stack developer in Nairobi, Kenya. Software that turns cash, M-PESA and trust into records people can rely on.">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,400;112,600;112,700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#14171C; --band:#1A1E25; --band-2:#20252E; --rule:#2A303A; --rule-2:#3A424F;
+  --fg:#EEF1F5; --fg-2:#9AA4B2; --fg-3:#6C7683;
+  --tape:#F1EDE3; --tape-ink:#1B1A17;
+  --credit:#00C06A; --debit:#E8574B; --stamp:#FFB020;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:repeating-linear-gradient(180deg,transparent 0 43px,rgba(42,48,58,.34) 43px 44px);}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+a{color:var(--credit);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:3px}
+.tnum{font-variant-numeric:tabular-nums}
+
+nav{border-bottom:1px solid var(--rule);background:var(--ink);position:sticky;top:0;z-index:30}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+nav .mark{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stamp)}
+nav ul{display:flex;gap:20px;list-style:none;flex-wrap:wrap}
+nav ul a{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+nav ul a:hover{color:var(--fg);text-decoration:none}
+
+/* ---------- hero ---------- */
+header{border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 330px 46px;gap:0;align-items:stretch;min-height:520px}
+.hero-l{padding:64px 44px 56px 0;display:flex;flex-direction:column;justify-content:center}
+.stamp{align-self:flex-start;font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stamp);
+  border:1px solid var(--stamp);padding:6px 12px;transform:rotate(-1.4deg);margin-bottom:26px}
+h1{font-size:clamp(2.7rem,7vw,4.6rem);line-height:.94;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;text-wrap:balance}
+h1 em{font-style:normal;color:var(--credit)}
+.rule-draw{height:2px;background:var(--rule-2);margin:26px 0;transform-origin:left;animation:draw .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero-l .lead{color:var(--fg-2);max-width:50ch;font-size:1.06rem}
+.hero-l .sig{font-family:var(--mono);font-size:.8rem;color:var(--fg-3);margin-top:26px;line-height:2}
+.hero-l .sig b{color:var(--fg);font-weight:500}
+.hero-m{border-left:1px solid var(--rule);border-right:1px solid var(--rule);padding:0;display:flex;flex-direction:column;background:var(--band)}
+.hero-m img{width:100%;flex:1;object-fit:cover;object-position:50% 18%;display:block;filter:grayscale(.28) contrast(1.08) brightness(.92)}
+.hero-m .cap{background:var(--tape);color:var(--tape-ink);padding:13px 16px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  display:flex;justify-content:space-between;gap:10px;text-transform:uppercase}
+.tape{background:var(--band);border-left:1px solid var(--rule);overflow:hidden;position:relative}
+.tape-in{position:absolute;top:0;left:0;width:520px;transform:rotate(90deg);transform-origin:0 0;translate:46px 0;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;color:var(--fg-3);white-space:nowrap;line-height:46px;text-transform:uppercase}
+
+/* ---------- ledger ---------- */
+section{padding:60px 0;border-bottom:1px solid var(--rule)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+h2{font-size:1.1rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.sec-head .idx{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
+.sec-sub{color:var(--fg-3);font-size:.93rem;margin-bottom:34px;max-width:66ch}
+
+.ledger{border-top:1px solid var(--rule-2)}
+.row{display:grid;grid-template-columns:52px minmax(0,1.55fr) minmax(0,1fr) 168px;gap:26px;
+  padding:22px 12px 22px 0;border-bottom:1px solid var(--rule);transition:background .16s}
+.row:hover{background:var(--band)}
+.row .no{font-family:var(--mono);font-size:.78rem;color:var(--fg-3);padding-top:4px}
+.row h3{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;margin-bottom:2px}
+.row .what{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stamp);margin-bottom:10px}
+.row p{color:var(--fg-2);font-size:.94rem;max-width:52ch}
+.row .stack{font-family:var(--mono);font-size:.73rem;color:var(--fg-3);line-height:1.95;padding-top:4px}
+.row .cell{display:flex;flex-direction:column;gap:9px;align-items:flex-start;padding-top:4px}
+.state{font-family:var(--mono);font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;padding:4px 9px;border:1px solid currentColor}
+.state.live{color:var(--credit)}
+.state.wip{color:var(--debit)}
+.go{font-family:var(--mono);font-size:.76rem;color:var(--fg);border-bottom:1px solid var(--rule-2);padding-bottom:1px}
+.go:hover{color:var(--credit);border-color:var(--credit);text-decoration:none}
+.totals{display:flex;gap:36px;flex-wrap:wrap;padding:22px 0 0;font-family:var(--mono);font-size:.76rem;color:var(--fg-3);letter-spacing:.06em}
+.totals b{display:block;font-size:1.5rem;color:var(--fg);letter-spacing:-.02em;font-family:var(--sans);font-weight:700;margin-bottom:2px}
+.cold{margin-top:26px;font-size:.88rem;color:var(--fg-3);border-left:2px solid var(--rule-2);padding-left:16px;max-width:70ch}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:38px}
+.prose p{color:var(--fg-2);max-width:60ch}
+.prose p + p{margin-top:16px}
+.prose strong{color:var(--fg);font-weight:600}
+.prose code{font-family:var(--mono);font-size:.86em;color:var(--credit)}
+.chips{display:flex;flex-wrap:wrap;gap:0}
+.chip{font-family:var(--mono);font-size:.74rem;color:var(--fg-2);border:1px solid var(--rule);padding:7px 12px;margin:-1px 0 0 -1px}
+.edu{border-left:2px solid var(--credit);padding-left:16px}
+.edu + .edu{margin-top:20px}
+.edu h3{font-size:1rem;font-weight:600}
+.edu p{color:var(--fg-2);font-size:.92rem}
+.cta{display:flex;gap:0;flex-wrap:wrap;margin-top:24px}
+.cta a{font-family:var(--mono);font-size:.8rem;color:var(--fg);border:1px solid var(--rule-2);padding:14px 20px;margin:-1px 0 0 -1px;transition:.16s}
+.cta a:hover{background:var(--credit);border-color:var(--credit);color:var(--ink);text-decoration:none}
+footer{padding:32px 0 48px;font-family:var(--mono);font-size:.72rem;color:var(--fg-3);letter-spacing:.06em}
+footer p{margin-top:8px;font-family:var(--sans);font-size:.85rem;letter-spacing:0}
+
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-l{padding:44px 0 34px}
+  .hero-m{border-left:0;border-right:0;border-top:1px solid var(--rule)}
+  .hero-m img{aspect-ratio:4/3;flex:none}
+  .tape{display:none}
+  .row{grid-template-columns:38px minmax(0,1fr);gap:14px}
+  .row .stack,.row .cell{grid-column:2}
+  .row .cell{flex-direction:row;align-items:center;gap:16px;flex-wrap:wrap}
+  section{padding:44px 0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rule-draw{transform:none}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <span class="mark">G. N. Mukirai — Ledger</span>
+  <ul>
+    <li><a href="#entries">Entries</a></li>
+    <li><a href="#notes">Notes</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#settle">Settle up</a></li>
+  </ul>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="hero">
+    <div class="hero-l">
+      <span class="stamp">Nairobi, Kenya · Open for work</span>
+      <h1>I turn cash, M&#8209;PESA and trust into <em>records people can rely on</em>.</h1>
+      <div class="rule-draw"></div>
+      <p class="lead">Full-stack developer. Chamas, fundis, boda riders, market traders, smallholder farmers — the parts of the economy that still run on a notebook. I build the version that beats the notebook.</p>
+      <p class="sig">Digital Craftsman — I don't just write code, I whittle it.<br><b>Flask · PostgreSQL · React · TypeScript · Kotlin · Linux</b></p>
+    </div>
+    <figure class="hero-m">
+      <img src="../assets/img/profile.jpg" alt="George Njihia Mukirai">
+      <figcaption class="cap"><span>George Njihia Mukirai</span><span class="tnum">Nairobi · UTC+3</span></figcaption>
+    </figure>
+    <div class="tape"><div class="tape-in">KIPATO · HESABU · FUNDI CONNECT · SOKO · AGRILINK · FITI · FINT · TUBONGE · VETTY · MBUU ·</div></div>
+  </div>
+</div></header>
+
+<section id="entries"><div class="wrap">
+  <div class="sec-head"><h2>Entries</h2><span class="idx">Ledger 01 — shipped &amp; in flight</span></div>
+  <p class="sec-sub">Every row below is a real deployment with a URL you can open right now, or an honest note that it isn't finished yet.</p>
+
+  <div class="ledger">
+
+    <article class="row">
+      <span class="no tnum">01</span>
+      <div>
+        <p class="what">Income record</p>
+        <h3>Kipato</h3>
+        <p>Offline-first income record for informal workers. Log daily cash with no signal, import M-PESA history, generate a verifiable income statement a SACCO or lender can open without an account. An IndexedDB outbox queues offline writes and reconciles on reconnect.</p>
+      </div>
+      <p class="stack">React 19 · Vite<br>Tailwind 4 · TanStack Query<br>Flask · SQLAlchemy · PostgreSQL</p>
+      <div class="cell">
+        <span class="state live">Live</span>
+        <a class="go" href="https://kipato.vercel.app" target="_blank" rel="noopener">Open app →</a>
+        <a class="go" href="https://github.com/gnm7208/kipato" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">02</span>
+      <div>
+        <p class="what">Chama reconciliation</p>
+        <h3>Hesabu</h3>
+        <p>Close-the-books tooling for savings groups. Parses a chama's M-PESA messages into a dispute-proof ledger — contributions, arrears, monthly statements — so the treasurer stops matching SMS to names in a notebook.</p>
+      </div>
+      <p class="stack">React · TypeScript<br>Flask · PostgreSQL</p>
+      <div class="cell">
+        <span class="state live">Live</span>
+        <a class="go" href="https://hesabu-sigma.vercel.app" target="_blank" rel="noopener">Open app →</a>
+        <a class="go" href="https://github.com/gnm7208/Hesabu" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">03</span>
+      <div>
+        <p class="what">Escrow marketplace</p>
+        <h3>Fundi Connect</h3>
+        <p>Verified informal-services marketplace. The customer's money is locked with the platform, not handed to the fundi. Identity verification, geo-search, ratings, Daraja integration — every shilling stored as an integer minor unit so no float ever touches money.</p>
+      </div>
+      <p class="stack">React 19 · TypeScript · Vite<br>Flask 3 · SQLAlchemy 2<br>Safaricom Daraja</p>
+      <div class="cell">
+        <span class="state live">Live</span>
+        <a class="go" href="https://fundi-connect-pi.vercel.app" target="_blank" rel="noopener">Open app →</a>
+        <a class="go" href="https://github.com/gnm7208/fundi-connect" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">04</span>
+      <div>
+        <p class="what">Local marketplace</p>
+        <h3>Soko</h3>
+        <p>Retailers and customers, with listings, search, maps, delivery, real-time chat, ratings and payments. Socket.IO for the chat, verified webhooks for the money.</p>
+      </div>
+      <p class="stack">React · TypeScript<br>Flask · PostgreSQL<br>Socket.IO · Stripe / Flutterwave</p>
+      <div class="cell">
+        <span class="state live">Live</span>
+        <a class="go" href="https://soko-app-eight.vercel.app" target="_blank" rel="noopener">Open app →</a>
+        <a class="go" href="https://github.com/gnm7208/Soko" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">05</span>
+      <div>
+        <p class="what">Team of four — backend</p>
+        <h3>AgriLink</h3>
+        <p>Agricultural super app connecting farmers with experts through posts, communities and messaging, plus a market price board and a crop issue helper. One of two backend developers: JWT auth, role-based access, rate limiting, image uploads, and a feed built from two external APIs.</p>
+      </div>
+      <p class="stack">React 19 · Flask<br>PostgreSQL · Cloudinary<br>GitHub Actions</p>
+      <div class="cell">
+        <span class="state live">Live</span>
+        <a class="go" href="https://agrilink-self.vercel.app" target="_blank" rel="noopener">Open app →</a>
+        <a class="go" href="https://github.com/gnm7208/Agrilink" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">06</span>
+      <div>
+        <p class="what">Storefront</p>
+        <h3>Fiti Electronics</h3>
+        <p>A mini e-commerce store for electronics — category filters, live search, a persistent cart and a checkout flow. Designed, built and deployed entirely by me, from the first wireframe to the last <code>git push</code>.</p>
+      </div>
+      <p class="stack">JavaScript (ES6+)<br>JSON Server · Netlify</p>
+      <div class="cell">
+        <span class="state live">Live</span>
+        <a class="go" href="https://fiti.netlify.app" target="_blank" rel="noopener">Open app →</a>
+        <a class="go" href="https://github.com/gnm7208/Fiti_Electronics" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">07</span>
+      <div>
+        <p class="what">Android · Kotlin</p>
+        <h3>Fint</h3>
+        <p>Native Android school-management app written 100% in Kotlin — my capstone from the Mobile Internet Technology programme at eMobilis. A modernisation pass and M-Pesa fee payments are next.</p>
+      </div>
+      <p class="stack">Kotlin · Android<br>Gradle</p>
+      <div class="cell">
+        <span class="state wip">In progress</span>
+        <a class="go" href="https://github.com/gnm7208/Fint" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+    <article class="row">
+      <span class="no tnum">08</span>
+      <div>
+        <p class="what">Health · booking</p>
+        <h3>Tubonge</h3>
+        <p>Online therapy platform for Kenya: licensed therapists, M-Pesa booking, video sessions. Data model, row-level security rules and the payment flow are designed; implementation is under way.</p>
+      </div>
+      <p class="stack">Next.js · TypeScript<br>Supabase · Daily.co<br>Pesapal</p>
+      <div class="cell">
+        <span class="state wip">In progress</span>
+        <a class="go" href="https://github.com/gnm7208/Tubonge" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="totals">
+    <span><b class="tnum">6</b>live deployments</span>
+    <span><b class="tnum">2</b>in progress</span>
+    <span><b class="tnum">5</b>with a Flask + PostgreSQL backend</span>
+    <span><b class="tnum">3</b>built around M-PESA</span>
+  </div>
+
+  <p class="cold">The APIs run on free Render instances and cold-start after inactivity — the first request can take about 50 seconds, so give the login screen a moment. Bonus level: <a href="https://github.com/gnm7208/Vetty" target="_blank" rel="noopener">Vetty</a>, a veterinary e-commerce REST API, and <a href="https://github.com/gnm7208/Mbuu_2" target="_blank" rel="noopener">Mbuu</a>, a car-dealership CLI.</p>
+</div></section>
+
+<section id="notes"><div class="wrap">
+  <div class="sec-head"><h2>Notes</h2><span class="idx">Who is signing this</span></div>
+  <div class="cols">
+    <div class="prose">
+      <p>I started as a naive computer-science enthusiast who wanted to learn everything — code, Unix, Linux, theory — and I'm still that person, just with better error handling. I build projects from the ground up: planning, design, implementation, and deployment. My dream? To help carve out a name for Africa in software and robotics. (Blame the Transformers movies. I do.)</p>
+      <p>I trained in full-stack software development at <strong>Moringa School</strong> and in mobile development (Kotlin/Android) at <strong>eMobilis Technology Institute</strong>, both in Nairobi. My happy place is a Flask API talking to a PostgreSQL database, with a React frontend that doesn't need a single <code>!important</code>.</p>
+    </div>
+    <div>
+      <div class="edu">
+        <h3>Moringa School — Nairobi</h3>
+        <p>Full-Stack Software Engineering: JavaScript, React, Python, Flask, SQL and collaborative Git workflows across five project-based phases.</p>
+      </div>
+      <div class="edu">
+        <h3>eMobilis Technology Institute — Nairobi</h3>
+        <p>Mobile Internet Technology: mobile development including native Android with Kotlin.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="tools"><div class="wrap">
+  <div class="sec-head"><h2>Tools</h2><span class="idx">Fluent, and a few I argue with</span></div>
+  <div class="chips">
+    <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Kotlin</span><span class="chip">SQL</span><span class="chip">Bash</span><span class="chip">C++</span><span class="chip">Flask</span><span class="chip">SQLAlchemy</span><span class="chip">Alembic</span><span class="chip">PostgreSQL</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">TanStack Query</span><span class="chip">Node.js</span><span class="chip">Socket.IO</span><span class="chip">Android</span><span class="chip">Git</span><span class="chip">GitHub Actions</span><span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">Render</span><span class="chip">Vercel</span><span class="chip">Netlify</span><span class="chip">Neon</span>
+  </div>
+</div></section>
+
+<section id="settle"><div class="wrap">
+  <div class="sec-head"><h2>Settle up</h2><span class="idx">Balance due: one conversation</span></div>
+  <p class="sec-sub">Got a project, a job, or a strong opinion about tabs vs spaces? My inbox has a 100% uptime SLA (unlike some free-tier backends I know).</p>
+  <div class="cta">
+    <a href="mailto:mukiraigeorge@gmail.com">✉ mukiraigeorge@gmail.com</a>
+    <a href="https://github.com/gnm7208" target="_blank" rel="noopener">GitHub / gnm7208</a>
+    <a href="https://www.linkedin.com/in/george-mukirai-70b64a37a/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  © <span id="yr"></span> George Njihia Mukirai — Nairobi, Kenya
+  <p>Built with HTML, CSS, and a dangerous amount of tea. No frameworks were harmed in the making of this page.</p>
+</div></footer>
+
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
